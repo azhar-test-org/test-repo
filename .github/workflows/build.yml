@@ -36,10 +36,10 @@ jobs:
     #     token: ${{ secrets.GITHUB_TOKEN }}
     ### This action is optional, since if we use OAuth TOkens from JIRA, it will auto send build, deploy infos to jira [END]
 
-  deploy:
-    name: 'Deploy'
-    runs-on: ubuntu-latest
-    needs: build
+  # deploy:
+  #   name: 'Deploy'
+  #   runs-on: ubuntu-latest
+  #   needs: build
 
     # steps:
     #   - uses: actions/checkout@v2
@@ -60,26 +60,26 @@ jobs:
     #       state: success
     #       target_url: https://${{ env.BRANCH_NAME }}--my-site.netlify.app
 
-    steps:
-      - uses: actions/checkout@v2
+    # steps:
+    #   - uses: actions/checkout@v2
 
-      - name: Deploy to Netlify
-        id: netlify_deploy
-        uses: nwtgck/actions-netlify@v1.2
-        with:
-          publish-dir: './build'
-          production-branch: master
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: "New JIRA Deploy from GitHub Actions"
-          alias: ${{ github.head_ref }}
-          github-deployment-description: "This is GH Deployment Description"
-          github-deployment-environment: dev
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        timeout-minutes: 1
-      
-      - name: Get netlify output
-        if: steps.netlify_deploy.outputs.deploy-url != ''
-        run: |
-          echo "${{steps.netlify_deploy.outputs.deploy-url}}"
+    - name: Deploy to Netlify
+      id: netlify_deploy
+      uses: nwtgck/actions-netlify@v1.2
+      with:
+        publish-dir: './build'
+        production-branch: master
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        deploy-message: "New JIRA Deploy from GitHub Actions"
+        alias: ${{ github.head_ref }}
+        github-deployment-description: "This is GH Deployment Description"
+        github-deployment-environment: dev
+      env:
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      timeout-minutes: 1
+    
+    - name: Get netlify output
+      if: steps.netlify_deploy.outputs.deploy-url != ''
+      run: |
+        echo "${{steps.netlify_deploy.outputs.deploy-url}}"
