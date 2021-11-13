@@ -23,19 +23,28 @@ jobs:
       run: npm test -- --passWithNoTests
     - name: Build Client
       run: npm run build
-    - name: Parse Jira Keys from Commit
-      id: jira_keys
-      if: always()
-      uses: HighwayThree/jira-extract-issue-keys@master
+    - name: Jira Integration
+      if: ${{ always() }}
+      uses: rohit-gohri/jira-ci-cd-integration@v0
       with:
-        is-pull-request: true
-        parse-all-commits: true
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Confirm Jira Keys From Commit
-      if: success()
-      run: |  
-        echo "Jira Keys response: ${{ steps.jira_keys.outputs.response }}"
+        state: ${{ job.status }}
+        jira_instance: https://azanay.atlassian.net
+        client_id: ${{ secrets.CLIENT_ID }}
+        client_secret: ${{ secrets.CLIENT_SECRET }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+    # - name: Parse Jira Keys from Commit
+    #   id: jira_keys
+    #   if: always()
+    #   uses: HighwayThree/jira-extract-issue-keys@master
+    #   with:
+    #     is-pull-request: ${{ github.event_name == 'pull_request' }}
+    #     parse-all-commits: ${{ github.event_name == 'push' }}
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    # - name: Confirm Jira Keys From Commit
+    #   if: success()
+    #   run: |  
+    #     echo "Jira Keys response: ${{ steps.jira_keys.outputs.response }}"
     # - name: Push Build Info to Jira
     #   if: steps.jira_keys.outputs.jira-keys != ''
     #   id: push_build_info_to_jira
