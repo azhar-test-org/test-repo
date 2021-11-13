@@ -10,6 +10,8 @@ function App() {
           YaY!! Edit <code>src/App.js</code> and save to reload !! From GH Axns.
           <br />
           More content
+          <br />
+          More content 13
         </p>
         <a
           className="App-link"
