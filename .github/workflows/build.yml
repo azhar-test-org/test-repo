@@ -23,12 +23,15 @@ jobs:
       run: npm test -- --passWithNoTests
     - name: Build Client
       run: npm run build
-    - name: Jira Integration
-      if: ${{ always() }}
-      uses: rohit-gohri/jira-ci-cd-integration@v0
-      with:
-        state: ${{ job.status }}
-        jira_instance: azanay
-        client_id: ${{ secrets.CLIENT_ID }}
-        client_secret: ${{ secrets.CLIENT_SECRET }}
-        token: ${{ secrets.GITHUB_TOKEN }}
+    ### This action is optional, since if we use OAuth TOkens from JIRA, it will auto send build, deploy infos to jira [START]
+    ### I am commenting this now...use it if Oauth Doesnt work
+    # - name: Jira Integration
+    #   if: ${{ always() }}
+    #   uses: rohit-gohri/jira-ci-cd-integration@v0
+    #   with:
+    #     state: ${{ job.status }}
+    #     jira_instance: azanay
+    #     client_id: ${{ secrets.CLIENT_ID }}
+    #     client_secret: ${{ secrets.CLIENT_SECRET }}
+    #     token: ${{ secrets.GITHUB_TOKEN }}
+    ### This action is optional, since if we use OAuth TOkens from JIRA, it will auto send build, deploy infos to jira [END]
