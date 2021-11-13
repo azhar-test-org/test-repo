@@ -71,7 +71,7 @@ jobs:
         production-branch: master
         github-token: ${{ secrets.GITHUB_TOKEN }}
         deploy-message: "New JIRA Deploy from GitHub Actions"
-        alias: ${{ github.head_ref }}
+        # alias: ${{ github.head_ref }}
         github-deployment-description: "This is GH Deployment Description"
         github-deployment-environment: dev
       env:
