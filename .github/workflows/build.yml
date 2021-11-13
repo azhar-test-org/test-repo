@@ -28,8 +28,8 @@ jobs:
       if: always()
       uses: HighwayThree/jira-extract-issue-keys@master
       with:
-        is-pull-request: ${{ github.event_name == 'pull_request' }}
-        parse-all-commits: ${{ github.event_name == 'push' }}
+        is-pull-request: true
+        parse-all-commits: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Confirm Jira Keys From Commit
