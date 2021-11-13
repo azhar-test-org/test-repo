@@ -23,3 +23,12 @@ jobs:
       run: npm test -- --passWithNoTests
     - name: Build Client
       run: npm run build
+    - name: Jira Integration
+      if: ${{ always() }}
+      uses: rohit-gohri/jira-ci-cd-integration@v0
+      with:
+        state: ${{ job.status }}
+        jira_instance: azanay
+        client_id: ${{ secrets.CLIENT_ID }}
+        client_secret: ${{ secrets.CLIENT_SECRET }}
+        token: ${{ secrets.GITHUB_TOKEN }}
