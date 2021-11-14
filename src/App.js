@@ -7,7 +7,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Alhamdullilah !! Mult - env deploy is working fine
+          Alhamdullilah !! Multi - env deploy is working fine
         </p>
       </header>
     </div>
