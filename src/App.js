@@ -7,22 +7,8 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          YaY!! Edit <code>src/App.js</code> and save to reload !! From GH Axns.
-          <br />
-          More content
-          <br />
-          More content 13
-          <br />
-          More content 14
+          Alhamdullilah !! Mult - env deploy is working fine
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
     </div>
   );
